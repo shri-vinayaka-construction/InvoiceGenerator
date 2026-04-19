@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator | Shri Vinayaka Construction</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="input-panel">
+            <div class="brand-header">
+                <h1>SHRI VINAYAKA CONSTRUCTION</h1>
+                <p style="font-size: 10px; color: #888;">& INTERIOR DESIGNS</p>
+            </div>
+
+            <h2>Client Details</h2>
+            <input type="text" id="clientName" placeholder="Client Name">
+            <textarea id="clientAddress" placeholder="Client Address" rows="2"></textarea>
+            <input type="tel" id="clientPhone" placeholder="WhatsApp Number (e.g. 91...)">
+
+            <h2>Invoice Details</h2>
+            <input type="text" id="invoiceNumber" placeholder="Invoice Number (e.g. SVC-001)">
+            <input type="date" id="invoiceDate">
+
+            <h2>Work Items</h2>
+            <div id="lineItemsContainer"></div>
+            <button class="btn btn-add" id="addItemBtn">+ Add Work Item</button>
+
+            <h2>Tax & Discount</h2>
+            <input type="number" id="taxPercentage" placeholder="GST % (e.g. 18)">
+
+            <div style="margin-top: 30px;">
+                <button class="btn btn-pdf" id="downloadPdfBtn">Download PDF Invoice</button>
+                <button class="btn btn-wa" id="whatsappBtn">Send WhatsApp Reminder</button>
+                <button class="btn" style="background:#eee; color:#333;" onclick="window.print()">Print Manual</button>
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <div id="invoicePreview" class="invoice-page">
+                <div class="invoice-top">
+                    <img src="logo.png" class="company-logo" alt="SVC Logo">
+                    <div class="company-info">
+                        <h2 style="border:none; margin:0; color:var(--primary); font-size:16px;">SHRI VINAYAKA CONSTRUCTION</h2>
+                        <p>& INTERIOR DESIGNS</p>
+                        <p>PEENYA INDUSTRIAL AREA</p>
+                        <p>BANGLORE - 560091</p>
+                        <p>Phone: +91 [9449603706]</p>
+                    </div>
+                </div>
+
+                <div class="invoice-details">
+                    <div class="bill-to">
+                        <h3>BILL TO:</h3>
+                        <p><strong id="p-clientName">---</strong></p>
+                        <p id="p-clientAddress" style="white-space: pre-line;">---</p>
+                        <p id="p-clientPhone">---</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <h1 style="color: var(--primary); font-size: 40px; margin-bottom: 10px;">INVOICE</h1>
+                        <p><strong>Date:</strong> <span id="p-date">---</span></p>
+                        <p><strong>Invoice #:</strong> <span id="p-invoiceNumber">---</span></p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description of Work</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="p-lineItems">
+                        </tbody>
+                </table>
+
+                <div class="totals">
+                    <div class="total-row"><span>Subtotal:</span> <span id="p-subtotal">₹0.00</span></div>
+                    <div class="total-row"><span>GST (<span id="p-taxRate">0</span>%):</span> <span id="p-taxAmount">₹0.00</span></div>
+                    <div class="total-row grand-total"><span>Total Amount:</span> <span id="p-total">₹0.00</span></div>
+                </div>
+                
+                <div style="margin-top: 100px; font-size: 12px; color: #888;">
+                    <p><strong>Terms:</strong> Please make payments within 7 days of invoice date.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
