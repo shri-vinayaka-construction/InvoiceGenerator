@@ -17,7 +17,7 @@ function setupListeners() {
 
     document.getElementById('addItemBtn').addEventListener('click', addItem);
     document.getElementById('downloadPdfBtn').addEventListener('click', () => {
-        generatePDF();
+        await generatePDF();
         saveToSheet();
     });
     document.getElementById('whatsappBtn').addEventListener('click', sendWhatsApp);
