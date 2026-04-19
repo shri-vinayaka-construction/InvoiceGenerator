@@ -105,7 +105,24 @@ async function saveToSheet() {
         totalAmount:   document.getElementById('p-total').innerText,
         whatsAppNumber:document.getElementById('clientPhone').value
     };
-    fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+    
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        console.log('✅ Sheet saved:', result);
+        
+        // Optional: Show success toast
+        // alert('Invoice saved to Google Sheets!');
+        
+    } catch (error) {
+        console.error('❌ Sheet save failed:', error);
+        // alert('Warning: Invoice PDF generated, but Google Sheets sync failed. Please check console.');
+    }
 }
 
 function sendWhatsApp() {
